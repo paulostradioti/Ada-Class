@@ -1,0 +1,36 @@
+﻿@model UploadViewModel
+
+<h2>Novo Upload</h2>
+
+@if (TempData["msg"] is string m)
+{
+    <div class="alert alert-success">@m</div>
+}
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descricao" class="form-label"></label>
+        <textarea asp-for="Descricao" class="form-control"></textarea>
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Anexos (vários)</label>
+        <input asp-for="Anexos" type="file" class="form-control" multiple />
+        <span asp-validation-for="Anexos" class="text-danger"></span>
+        <div class="form-text">Permitidos: .png, .jpg, .pdf — até 10MB cada.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
