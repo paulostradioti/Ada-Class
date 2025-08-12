@@ -1,0 +1,13 @@
+﻿@model WebApplication1.Data.Aluno
+
+<form asp-action="Edit" method="post">
+    <div>
+        Nome: <input asp-for="Nome" />
+        <span asp-validation-for="Nome"></span>
+    </div>
+    <div>
+        Turma: <select asp-for="TurmaId" asp-items="ViewBag.Turmas"></select>
+        <span asp-validation-for="TurmaId"></span>
+    </div>
+    <input type="submit" value="Salvar" />
+</form>

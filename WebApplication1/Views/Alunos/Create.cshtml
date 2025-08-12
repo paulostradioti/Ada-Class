@@ -1,0 +1,19 @@
+﻿@model WebApplication1.Data.Aluno
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        Nome: <input asp-for="Nome" />
+        <span asp-validation-for="Nome"></span>
+    </div>
+    <div>
+        Turma: <select asp-for="TurmaId" asp-items="ViewBag.Turmas"></select>
+        <span asp-validation-for="TurmaId"></span>
+    </div>
+    <input type="submit" value="Salvar" />
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

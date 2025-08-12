@@ -1,0 +1,26 @@
+﻿@using WebApplication1.Data
+@model IEnumerable<Aluno>
+
+<a asp-action="Create">Create New</a>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Turma!.Nome)</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var aluno in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(_ => aluno.Id)</td>
+            <td>@Html.DisplayFor(_ => aluno.Nome)</td>
+            <td>@Html.DisplayFor(_ => aluno.Turma!.Nome)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@aluno.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@aluno.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

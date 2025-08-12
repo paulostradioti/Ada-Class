@@ -1,0 +1,68 @@
+﻿@using Application.Domain
+@model Turma
+
+<form asp-action="Create" method="post" class="mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h5 class="mb-0">Nova Turma</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label asp-for="Nome" class="form-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Professores</label>
+                <div id="professores-list">
+                    <div class="input-group mb-2 align-items-center">
+                        <span class="input-group-text">
+                            <span class="badge bg-primary">1</span>
+                        </span>
+                        <input name="Professores" class="form-control" placeholder="Nome do Professor" />
+                        <button type="button" class="btn btn-danger" title="Remover" onclick="removeProfessor(this)">
+                            <i class="bi bi-x-lg"></i> Remover
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary mt-2" onclick="addProfessor()">
+                    <i class="bi bi-plus-lg"></i> Adicionar Professor
+                </button>
+                <span asp-validation-for="Professores" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function addProfessor() {
+            var container = document.getElementById('professores-list');
+            var index = container.children.length + 1;
+            var div = document.createElement('div');
+            div.className = 'input-group mb-2 align-items-center';
+            div.innerHTML = `<span class="input-group-text">
+                                <span class="badge bg-primary">` + index + `</span>
+                             </span>
+                             <input name="Professores" class="form-control" placeholder="Nome do Professor" />
+                             <button type="button" class="btn btn-danger" title="Remover" onclick="removeProfessor(this)">
+                                <i class="bi bi-x-lg"></i> Remover
+                             </button>`;
+            container.appendChild(div);
+        }
+        function removeProfessor(btn) {
+            var container = document.getElementById('professores-list');
+            if (container.children.length > 1) {
+                btn.parentElement.remove();
+                // Re-number badges
+                Array.from(container.children).forEach(function(child, idx) {
+                    var badge = child.querySelector('.badge');
+                    if (badge) badge.textContent = idx + 1;
+                });
+            }
+        }
+    </script>
+}
